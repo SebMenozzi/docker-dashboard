@@ -6,7 +6,6 @@ Feel free to propose new features that would be useful to add!
 
 [<img src="https://raw.githubusercontent.com/SebMenozzi/docker-dashboard/master/images/containers.png" align="center" width="400" hspace="2" vspace="10">](https://raw.githubusercontent.com/SebMenozzi/docker-dashboard/master/images/containers.png)
 [<img src="https://raw.githubusercontent.com/SebMenozzi/docker-dashboard/master/images/logs.png" align="center" width="400" hspace="2" vspace="10">](https://raw.githubusercontent.com/SebMenozzi/docker-dashboard/master/images/logs.png)
-[<img src="https://raw.githubusercontent.com/SebMenozzi/docker-dashboard/master/images/stats.png" align="center" width="400" hspace="2" vspace="10">](https://raw.githubusercontent.com/SebMenozzi/docker-dashboard/master/images/stats.png)
 
 ## Installation
 

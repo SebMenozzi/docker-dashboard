@@ -11,9 +11,6 @@ import Typography from '@mui/material/Typography';
 import NoResultComponent from '../components/NoResultComponent';
 import CommandInputComponent from '../components/CommandInputComponent';
 
-// API
-import nodeApi from '../api/nodeApi';
-
 const convert = new Convert();
 
 const LogsRoute = (props) => {
@@ -97,7 +94,9 @@ const LogsRoute = (props) => {
                             });
                         })}
                     </Typography>
-                    <CommandInputComponent />
+                    <CommandInputComponent
+                        id={window.location.pathname.split('/').pop()}
+                    />
                 </Paper>
             )}
             {(isLoading || logs.length == 0) && (

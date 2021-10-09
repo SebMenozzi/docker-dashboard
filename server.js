@@ -97,6 +97,17 @@ app.post('/api/delete_container', async (req, res) => {
     }
 });
 
+app.post('/api/send_command', async (req, res) => {
+    try {
+        const { id, command } = req.body;
+        await cmd_promise(`docker exec -it ${id} sh -c "${command}"`);
+
+        return res.status(200).json({ success: true });
+    } catch (error) {
+        return res.status(400).json({ success: false, error: error });
+    }
+});
+
 app.post('/api/restart_containers', async (req, res) => {
     try {
         await cmd_promise('docker restart $(docker ps -a -q)');
@@ -113,57 +124,6 @@ app.post('/api/delete_containers', async (req, res) => {
 
         return res.status(200).json({ success: true });
     } catch (error) {
-        return res.status(400).json({ success: false, error: error });
-    }
-});
-
-app.get('/api/instances', async (req, res) => {
-    try {
-        const instances = await cmd_promise(
-            'gcloud beta run services list --platform managed --format=json'
-        );
-        const instances_list = JSON.parse(instances);
-
-        let result = [];
-
-        for (let instance of instances_list) {
-            result.push({
-                name: instance['metadata']['name'],
-                region: instance['metadata']['labels'][
-                    'cloud.googleapis.com/location'
-                ],
-                max_scale:
-                    instance['spec']['template']['metadata']['annotations'][
-                        'autoscaling.knative.dev/maxScale'
-                    ],
-                image: instance['spec']['template']['metadata']['annotations'][
-                    'client.knative.dev/user-image'
-                ],
-                url: instance['status']['url'],
-                generation: instance['metadata']['generation'],
-                created_at: instance['metadata']['creationTimestamp'],
-                traffic: instance['spec']['traffic'][0]['percent'],
-                concurrency:
-                    instance['spec']['template']['spec'][
-                        'containerConcurrency'
-                    ],
-                last_build: instance['spec']['template']['metadata']['name'],
-                timeout: instance['spec']['template']['spec']['timeoutSeconds'],
-                port: instance['spec']['template']['spec']['containers'][0][
-                    'ports'
-                ][0]['containerPort'],
-                cpu: instance['spec']['template']['spec']['containers'][0][
-                    'resources'
-                ]['limits']['cpu'],
-                memory: instance['spec']['template']['spec']['containers'][0][
-                    'resources'
-                ]['limits']['memory']
-            });
-        }
-
-        return res.status(200).json({ success: true, instances: result });
-    } catch (error) {
-        console.log(error);
         return res.status(400).json({ success: false, error: error });
     }
 });

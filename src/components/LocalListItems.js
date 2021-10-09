@@ -1,14 +1,14 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 // Material UI
-import ListItem from '@mui/material/ListItem'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import ListItemText from '@mui/material/ListItemText'
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 
 // Icons
-import DashboardIcon from '@mui/icons-material/Dashboard'
-import BarChartIcon from '@mui/icons-material/BarChart'
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import BarChartIcon from '@mui/icons-material/BarChart';
 
 const LocalListItems = () => {
     return (
@@ -26,7 +26,7 @@ const LocalListItems = () => {
                 <ListItemText primary="Stats" />
             </ListItem>
         </div>
-    )
-}
+    );
+};
 
-export default LocalListItems
+export default LocalListItems;

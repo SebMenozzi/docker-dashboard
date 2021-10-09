@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 // Material UI
-import TextField from '@mui/material/TextField'
+import TextField from '@mui/material/TextField';
 
 const CommandInputComponent = (props) => {
     return (
@@ -11,8 +11,7 @@ const CommandInputComponent = (props) => {
             color="secondary"
             fullWidth
         />
-    )
+    );
+};
 
-}
-
-export default CommandInputComponent
+export default CommandInputComponent;

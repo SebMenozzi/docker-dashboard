@@ -1,88 +1,89 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 
 // Material UI
-import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
-import Button from '@mui/material/Button'
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
 // Icons
-import StopIcon from '@mui/icons-material/Stop'
-import PlayArrowIcon from '@mui/icons-material/PlayArrow'
+import StopIcon from '@mui/icons-material/Stop';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 // Components
-import useInterval from '../components/useInterval'
+import useInterval from '../components/useInterval';
 
-import ContainerComponent from '../components/ContainerComponent'
-import GreenButton from '../components/buttons/GreenButton'
-import RedButton from '../components/buttons/RedButton'
-import NoResultComponent from '../components/NoResultComponent'
+import ContainerComponent from '../components/ContainerComponent';
+import GreenButton from '../components/buttons/GreenButton';
+import RedButton from '../components/buttons/RedButton';
+import NoResultComponent from '../components/NoResultComponent';
 
 // API
-import nodeApi from '../api/nodeApi'
+import nodeApi from '../api/nodeApi';
 
 const ContainersRoute = (props) => {
-    const [isLoading, setIsLoading] = useState(true)
-    const [containers, setContainers] = useState([])
+    const [isLoading, setIsLoading] = useState(true);
+    const [containers, setContainers] = useState([]);
 
     const setContainersSorted = (result) => {
         // By name in alphabetic order
-        result.sort((a, b) => a.name.localeCompare(b.name))
-        setContainers(result)
-    }
+        result.sort((a, b) => a.name.localeCompare(b.name));
+        setContainers(result);
+    };
 
     const getContainers = () => {
-        const api = nodeApi()
+        const api = nodeApi();
 
-        api.get('/containers')
-            .then(result => {
-                setIsLoading(false)
-                setContainersSorted(result.data.containers)
-            })
-    }
+        api.get('/containers').then((result) => {
+            setIsLoading(false);
+            setContainersSorted(result.data.containers);
+        });
+    };
 
     const updateContainers = () => {
-        const api = nodeApi()
+        const api = nodeApi();
 
-        api.get('/containers')
-            .then(result => {
-                if (!isLoading || isLoading && result.data.containers.length > 0) {
-                    setIsLoading(false)
-                }
-                setContainersSorted(result.data.containers)
-            })
-    }
+        api.get('/containers').then((result) => {
+            if (
+                !isLoading ||
+                (isLoading && result.data.containers.length > 0)
+            ) {
+                setIsLoading(false);
+            }
+            setContainersSorted(result.data.containers);
+        });
+    };
 
     const restartContainers = (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
-        setIsLoading(true)
+        setIsLoading(true);
 
-        const api = nodeApi()
-        api.post('/restart_containers')
-    }
+        const api = nodeApi();
+        api.post('/restart_containers');
+    };
 
     const deleteContainers = (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
-        const api = nodeApi()
-        api.post('/delete_containers')
-    }
+        const api = nodeApi();
+        api.post('/delete_containers');
+    };
 
     const openDialog = (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
         // Open the workers dialog
-        setIsDialogOpen(true)
-    }
+        setIsDialogOpen(true);
+    };
 
     useEffect(() => {
-        props.setTitle('Containers')
+        props.setTitle('Containers');
 
         // Fetch containers
-        getContainers()
-    }, [])
+        getContainers();
+    }, []);
 
     // Polling containers
-    useInterval(() => updateContainers(), 1000)
+    useInterval(() => updateContainers(), 1000);
 
     return (
         <div>
@@ -93,7 +94,8 @@ const ContainersRoute = (props) => {
                     onClick={restartContainers}
                     startIcon={<PlayArrowIcon />}
                     disableElevation={true}
-                    disabled={isLoading}>
+                    disabled={isLoading}
+                >
                     Restart Containers
                 </GreenButton>
                 <RedButton
@@ -101,15 +103,15 @@ const ContainersRoute = (props) => {
                     onClick={deleteContainers}
                     startIcon={<StopIcon />}
                     disableElevation={true}
-                    disabled={isLoading}>
+                    disabled={isLoading}
+                >
                     Delete Containers
                 </RedButton>
             </Box>
             <Grid container spacing={3}>
-                {
-                    !isLoading &&
-                    (containers.length > 0) &&
-                    containers.map(container => {
+                {!isLoading &&
+                    containers.length > 0 &&
+                    containers.map((container) => {
                         return (
                             <Grid item xs={12} md={4} lg={3}>
                                 <ContainerComponent
@@ -121,16 +123,17 @@ const ContainersRoute = (props) => {
                                     port={container.port}
                                 />
                             </Grid>
-                        )
-                    })
-                }
-                {
-                    (isLoading || containers.length == 0) &&
-                    <NoResultComponent message={'No Containers'} isLoading={isLoading} />
-                }
+                        );
+                    })}
+                {(isLoading || containers.length == 0) && (
+                    <NoResultComponent
+                        message={'No Containers'}
+                        isLoading={isLoading}
+                    />
+                )}
             </Grid>
         </div>
-    )
-}
+    );
+};
 
-export default ContainersRoute
+export default ContainersRoute;

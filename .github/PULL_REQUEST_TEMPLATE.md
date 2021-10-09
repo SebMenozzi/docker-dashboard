@@ -1,15 +1,15 @@
 This PR addresses the following issues:
 
-Fixes *Replace with link to issue*
+Fixes _Replace with link to issue_
 
 ## What changed
 
-*Replace with description of changes proposed in this fix*
+_Replace with description of changes proposed in this fix_
 
 ## Testing done
 
-*Replace with how your changes were tested*
+_Replace with how your changes were tested_
 
 ## Testing recommendations
 
-*Please provide a checklist of elements that may be impacted by this Pull Request*
+_Please provide a checklist of elements that may be impacted by this Pull Request_

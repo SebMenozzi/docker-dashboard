@@ -1,14 +1,19 @@
-import React from 'react'
+import React from 'react';
 
 // Material UI
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Link from '@mui/material/Link'
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Link from '@mui/material/Link';
 
 const CopyrightComponent = (props) => {
     return (
         <Box pt={4}>
-            <Typography variant="body2" color="text.secondary" align="center" {...props}>
+            <Typography
+                variant="body2"
+                color="text.secondary"
+                align="center"
+                {...props}
+            >
                 {'Copyright © '}
                 <Link color="inherit" href="#">
                     Sebastien Menozzi
@@ -17,6 +22,6 @@ const CopyrightComponent = (props) => {
             </Typography>
         </Box>
     );
-}
+};
 
-export default CopyrightComponent
+export default CopyrightComponent;

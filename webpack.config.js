@@ -1,5 +1,5 @@
-const path = require('path')
-const webpack = require('webpack')
+const path = require('path');
+const webpack = require('webpack');
 const isProduction = process.env.NODE_ENV === 'production';
 
 const config = {
@@ -21,31 +21,6 @@ const config = {
                 ]
             },
             {
-                test: /\.(scss|sass)$/,
-                include: path.resolve(__dirname, 'src'),
-                use: [
-                    {
-                        loader: 'style-loader'
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: {
-                                localIdentName: "[sha1:hash:hex:4]",
-                            },
-                            sourceMap: !isProduction
-                        }
-                    },
-                    {
-                        loader: 'sass-loader'
-                    }
-                ]
-            },
-            {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
-            },
-            {
                 test: /\.(jpg|png|svg|ttf)$/,
                 include: path.resolve(__dirname, 'src'),
                 loader: 'file-loader'
@@ -59,6 +34,6 @@ const config = {
             }
         ]
     }
-}
+};
 
-module.exports = config
+module.exports = config;

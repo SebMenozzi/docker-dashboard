@@ -5,10 +5,12 @@ const morgan = require('morgan');
 const { exec, spawn } = require('child_process');
 const readline = require('readline');
 const bodyParser = require('body-parser');
+const { Server } = require("socket.io");
 
 const app = express();
-var server = http.createServer(app);
-var io = require('socket.io').listen(server);
+
+const server = http.createServer(app);
+const io = new Server(server);
 
 // static path
 app.use(express.static(__dirname));

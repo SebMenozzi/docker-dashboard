@@ -188,7 +188,7 @@ io.sockets.on('connection', (socket) => {
                 'logs',
                 name,
                 '--tail',
-                '200',
+                '1000',
                 '--follow'
             ]);
 
